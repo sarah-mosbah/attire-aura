@@ -4,6 +4,9 @@ import {
   createUserDocFromAuth,
 } from "../../utils/firebase/firbase.utils";
 import FormInput from "../../components/form-input/form-input.component";
+import "./sign-up-form.component.scss";
+import Button from "../button/button.component";
+
 const defaultFormFields = {
   displayName: "",
   email: "",
@@ -39,16 +42,16 @@ const SignUpForm = () => {
       }
     } catch (e) {}
   };
-  console.log("Hanfeleeee", formFields);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormFields({ ...formFields, [name]: value });
   };
 
   return (
-    <div>
-      <h1>Sign Up</h1>
+    <div className="sign-up-container">
+      <h3>Dont have an account ?</h3>
+      <span>Sign Up with your email and password</span>
       <form onSubmit={signUpWithEmailAndPassword}>
         <FormInput
           label={"Display Name"}
@@ -85,7 +88,7 @@ const SignUpForm = () => {
           value={confirmPassword}
         />
 
-        <button type="submit">Sign Up</button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );
