@@ -1,7 +1,5 @@
-import { useState } from "react";
-import {
-  signInAuthWithEmailAndPassword,
-} from "../../utils/firebase/firbase.utils";
+import { useState, useContext } from "react";
+import { signInAuthWithEmailAndPassword } from "../../utils/firebase/firbase.utils";
 import FormInput from "../form-input/form-input.component";
 import "./sign-in-form.component.scss";
 import Button from "../button/button.component";
@@ -9,25 +7,29 @@ import {
   signInWithGooglePopUp,
   createUserDocFromAuth,
 } from "../../utils/firebase/firbase.utils";
+import { UsersContext } from "../../contexts/users.context";
 
 const defaultFormFields = {
   email: "",
   password: "",
-
 };
 
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
 
-  const {  email, password } = formFields;
+  const { email, password } = formFields;
 
+
+  const {setCurrentUser} = useContext(UsersContext);
 
   const signInWithEmailAndPassword = async (event) => {
     event.preventDefault();
 
     const { email, password } = formFields;
     try {
-       await signInAuthWithEmailAndPassword(email, password);
+     const response =  await signInAuthWithEmailAndPassword(email, password);
+     console.log(response)
+     setCurrentUser(response.user);
     } catch (e) {}
   };
 
@@ -43,9 +45,7 @@ const SignInForm = () => {
 
   return (
     <div className="sign-in-container">
-
       <form onSubmit={signInWithEmailAndPassword}>
-    
         <FormInput
           label={"Email"}
           required
@@ -64,10 +64,15 @@ const SignInForm = () => {
           value={password}
         />
 
-<div className="buttons-container">
-      
-        <Button type="submit">Sign In</Button>
-        <Button type="button" buttonType={'google'} onClick={logginWithGoogle} >Google Sign in</Button>
+        <div className="buttons-container">
+          <Button type="submit">Sign In</Button>
+          <Button
+            type="button"
+            buttonType={"google"}
+            onClick={logginWithGoogle}
+          >
+            Google Sign in
+          </Button>
         </div>
       </form>
       <h2>Dont have Account?</h2>
