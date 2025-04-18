@@ -5,7 +5,6 @@ import "./sign-in-form.component.scss";
 import Button from "../button/button.component";
 import {
   signInWithGooglePopUp,
-  createUserDocFromAuth,
 } from "../../utils/firebase/firbase.utils";
 import { UsersContext } from "../../contexts/users.context";
 
@@ -20,16 +19,13 @@ const SignInForm = () => {
   const { email, password } = formFields;
 
 
-  const {setCurrentUser} = useContext(UsersContext);
-
   const signInWithEmailAndPassword = async (event) => {
     event.preventDefault();
 
     const { email, password } = formFields;
     try {
-     const response =  await signInAuthWithEmailAndPassword(email, password);
-     console.log(response)
-     setCurrentUser(response.user);
+     await signInAuthWithEmailAndPassword(email, password);
+    
     } catch (e) {}
   };
 
@@ -39,8 +35,8 @@ const SignInForm = () => {
   };
 
   const logginWithGoogle = async () => {
-    const { user } = await signInWithGooglePopUp();
-    await createUserDocFromAuth(user);
+    await signInWithGooglePopUp();
+   
   };
 
   return (
