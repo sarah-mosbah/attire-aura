@@ -1,9 +1,9 @@
 import "./cart-icon.component.scss";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
-import { CartDropDownContext } from "../../contexts/cart-dropdown.context";
+import { CartContext } from "../../contexts/cart.context";
 import { useContext } from "react";
 const CartIcon = () => {
-  const {setVisibility, visibility} = useContext(CartDropDownContext);
+  const {setVisibility, visibility} = useContext(CartContext);
   const onClickHandler = () => {
    
      setVisibility(!visibility);

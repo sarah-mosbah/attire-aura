@@ -7,11 +7,11 @@ import { signOutUser } from "../../utils/firebase/firbase.utils";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropDown from "../../components/cart-drop-down/cart-drop-down.component";
 import {
-  CartDropDownContext,
-} from "../../contexts/cart-dropdown.context";
+  CartContext,
+} from "../../contexts/cart.context";
 const Navigation = () => {
   const { currentUser, setCurrentUser } = useContext(UsersContext);
-  const { visibility } = useContext(CartDropDownContext);
+  const { visibility } = useContext(CartContext);
 
   const signOuHandler = async () => {
     await signOutUser();
