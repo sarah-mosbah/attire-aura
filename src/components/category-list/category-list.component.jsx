@@ -1,5 +1,5 @@
 import React from "react";
-import CategoryItem from "../category-item/category-item.component";
+import DirectoryItem from "../directory-item/directory-item.component";
 import "./category-list.component.scss";
 const CategoryList = ({ categories }) => {
   return (
@@ -10,7 +10,7 @@ const CategoryList = ({ categories }) => {
           id,
           imageUrl,
         };
-        return <CategoryItem {...props} key={id} />;
+        return <DirectoryItem {...props} key={id} />;
       })}
     </div>
   );
